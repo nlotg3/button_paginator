@@ -227,16 +227,36 @@ class Paginator(discord.ui.View):
                 view=self,
             )
 
+    class MySelect(View):
+
+        @discord.ui.select(placeholder="Choose an option",
+                           options=[discord.SelectOption(label="Edited Embed", value="1", description="this a embed"),
+                                    discord.SelectOption(label="Edited Embed", value="2", description="this a embed")
+                                    ])
+    
+        async def select_callback(self, interaction, select):
+            select.disabled=True
+            if select.values[0] == "1":
+                embed = discord.Embed(color=co)
+                embed.set_author(name="1st embed")
+                embed.add_field(name="name", value="value", inline=False)
+                await interaction.response.edit_message(embed=embed)
+            if select.values[0] == "2":
+                embed = discord.Embed(color=co)
+                embed.set_author(name="2nd embed")
+                embed.add_field(name="name", value="value", inline=False)
+                await interaction.response.edit_message(embed=embed)
+    
     async def start(self):
         try:
             current = self.embeds[self.page]
             if isinstance(current, str):
                 self.message = await self.destination.reply(
-                    mention_author=False, content=current, embed=None, view=self
+                    mention_author=False, content=current, embed=None, view=MySelect
                 )
             elif isinstance(current, discord.Embed):
                 self.message = await self.destination.reply(
-                    mention_author=False, content=None, embed=current, view=self
+                    mention_author=False, content=None, embed=current, view=MySelect
                 )
             elif isinstance(current, tuple):
                 dct = {}
@@ -248,7 +268,7 @@ class Paginator(discord.ui.View):
                 self.message = await self.destination.reply(
                     mention_author=False, content=dct.get("content", None),
                     embed=dct.get("embed", None),
-                    view=self,
+                    view=MySelect,
                 )
         except discord.HTTPException:
             self.stop()
