@@ -11,7 +11,7 @@ setup(
     long_description=desc,
     long_description_content_type="text/markdown",
     author="1strating",
-    url="https://github.com/1strating/button_paginator",
+    url="https://github.com/nlotg3/button_paginator",
     python_requires=">=3.6",
     packages=find_packages(include=["button_paginator", "button_paginator.*"]),
 )
