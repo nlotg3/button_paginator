@@ -253,11 +253,11 @@ class Paginator(discord.ui.View):
             v = MySelect
             if isinstance(current, str):
                 self.message = await self.destination.reply(
-                    mention_author=False, content=current, embed=None, view=self, v
+                    mention_author=False, content=current, embed=None, view=v
                 )
             elif isinstance(current, discord.Embed):
                 self.message = await self.destination.reply(
-                    mention_author=False, content=None, embed=current, view=self, v
+                    mention_author=False, content=None, embed=current, view=v
                 )
             elif isinstance(current, tuple):
                 dct = {}
@@ -269,7 +269,7 @@ class Paginator(discord.ui.View):
                 self.message = await self.destination.reply(
                     mention_author=False, content=dct.get("content", None),
                     embed=dct.get("embed", None),
-                    view=self, v,
+                    view=v,
                 )
         except discord.HTTPException:
             self.stop()
