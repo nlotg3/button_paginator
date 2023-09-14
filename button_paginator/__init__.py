@@ -4,7 +4,7 @@ import discord, typing
 
 with open('config.json') as f:
     config = json.load(f)
-    warn = config["warn2"]
+    warn = config["warn"]
 
 async def aiter(
     iterable: typing.Iterator[typing.Any],
