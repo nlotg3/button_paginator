@@ -230,7 +230,6 @@ class Paginator(discord.ui.View):
     async def start(self):
         try:
             current = self.embeds[self.page]
-            v = MySelect
             if isinstance(current, str):
                 self.message = await self.destination.reply(
                     mention_author=False, content=current, embed=None, view=self
